@@ -1,0 +1,87 @@
+1. Explain levels of git config.
+System-системный, Global-пользовательский, local- проектный.
+2. Init an empty repo.
+Git init 
+3. Clone a repo from a source
+git clone <ссылка>
+4. Set editor to vi for your user.
+git config --global core.editor vi
+5. Configure your name and email
+Git config —global user.name “Anna-Maria Bykova”
+Git config —global user.email bykovaannamaria@gmail.com
+6. Checkout a new branch. One command, two commands.
+Git branch my-branch
+Git checkout my-branch /
+Git checkout -b my branch
+7. You've sent the wrong branch to remote, remove it locally and remotely
+Git branch -d my-branch
+git push origin --delete my-branch
+8. What does git branch -D branchName?
+Удаление локальной ветки независимо от статуса merge
+9. How to add your changes to commit?
+git commit --amend
+10. You have two files ready to be committed, how do you remove one of them?
+Git rm <имя файла>
+11. Compare current branch with your main branch
+git diff ..master
+12. Compare two different branches Commit history. 
+Git diff branch1..branch2
+13. Commit history. How to view? What are different ways of displaying it?/История коммитов. Как просмотреть? Какие существуют способы его отображения?
+Git log - просмотр истории изменений
+git log —oneline - просмотр комитов с хэшами
+git log —graph - просмотр истории по веткам
+Git reflog - просмотр истории перемещения HEAD
+14. How to add a file to a commit you've just made?
+git commit --amend 
+15. How to change the message of a commit you've just made? / Как изменить сообщение коммита, который вы только что сделали?
+git commit --amend -m “сообщение для коммита”
+16. Is there a more safe version of force pushing? What does force pushing mean? / Есть ли более безопасная версия принудительного нажатия? Что означает принудительное нажатие?
+Git push —force-with-lease не перезапишет работу в удал.ветке, если в нее были добавлены кометы др. Пользователей
+Git push —force - принудительно перезаписывает  удаленный репозиторий в соответствии с локальным репозиторием
+17. You committed two times and realized you're on a wrong branch (master, for instance), move you commit to a new branch leaving the old one unchanged./ Вы совершили коммит два раза и поняли, что находитесь не в той ветке (например, master), переместите коммит в новую ветку, оставив старую без изменений.
+В новой ветке git cherry-pick <хэш коммита>
+18. Undo two latest commits (not loosing the code itself)/Отменить два последних коммита (без потери самого кода)
+git reset --soft HEAD~2
+19. You have WIP changes, but you want to quickly peek at a different branch. How do you do that so your local changes are not broken?/ У вас есть изменения WIP, но вы хотите быстро просмотреть другую ветку. Как вы это делаете, чтобы ваши локальные изменения не нарушались?
+git stash
+20. How to make git ignore various different files you never want to commit? /Как заставить git игнорировать различные файлы, которые вы никогда не хотите фиксировать?
+.gitignore
+21. stash vs stash -a ?
+git stash - временно локально сохранить свои изменения
+git stash -а  - временно локально сохранить свои изменения, включая игнорируемые файлы и неотслеживаемые
+22. What is the difference between stash pop and stash apply?
+git stash apply - применить изменения, они также останутся в stash
+git stash pop - применить последние изменения и удалить stash
+23. What is the difference between stash save and stash push?
+Git stash push - есть возможность сохранить выбранные спецификации пути, что не поддерживает Git stash save (устаревшая)
+24. How to see the list of stashes?
+git stash list
+25. How to see the changes a stash has in it?
+Git stash show
+26. Do you need to do fetch (origin) before pull?
+Да, для того, чтобы предотвратить конфликты
+27. Explain difference between git pull and git fetch
+Git fetch загружает удаленное содержимое, но не обновляет рабочее состояние локального репозитория.
+git pull  загружает удаленное содержимое для активной локальной ветки, создавая коммит слияния для нового удаленного содержимого; аналогична командам git fetch и git merge.
+28. What is rebase? How to rebase?
+один из способов объединить веток, с целью обеспечения актуальности и линейной истории проекта
+Git rebase<another_branch>
+29. What is git reflog?   
+Выводит журнал ссылок для указателя HEAD.
+30. What do you do if you want an empty folder to be stored in git?/Что делать, если вы хотите, чтобы пустая папка хранилась в git?
+Создание пустого файла .gitkeep
+31. What is git reset? What are different types of reset? Explain difference
+-Git resort --hard <хэш коммита> - сбрасывает все файлы до указанного коммита/ удаляет их
+-Git resort—soft <хэш коммита> - сбрасывает закомиченные файлы в индекс
+-Git resort--mixed = git resort 
+32. How do you change files in 10th commit?
+git rebase -i HEAD~10
+В текстовом редакторе изменить pick на edit у 10 коммита
+Добавить изменения в индекс и коммит
+git commit --amend
+git rebase --continue
+33. Explain tags. Why do they exist? Explain how to tag.
+Git tag <tagname>
+Tag указывающие на определенные точки в истории.
+34. What is git blame?
+команда, позволяющая посмотреть когда и кем редактировалась каждая строка файла в последний раз.
